@@ -1,0 +1,140 @@
+package net.hdcx.view.askforleave;
+
+import net.hdcx.utils.ImageIconUtils;
+import net.hdcx.utils.ScreenUtils;
+import net.hdcx.view.IWindow;
+import net.hdcx.view.askforleave.listener.AskForLeaveBtnListener;
+import net.hdcx.view.askforleave.listener.CancelBtnListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+
+/**
+ * 请假对话框
+ * Created by Kevin on 2017/2/26.
+ */
+public class AskForLeaveDialog extends JDialog implements IWindow{
+
+	private JLabel nameLabel = null;
+	private JLabel IDLabel = null;
+	private static JTextField nameField = null;
+	private static JTextField idField = null;
+	private JButton askForLeaveBtn = null;
+	private JButton cancelBtn = null;
+	private Font labelFont = null;
+	private JPanel centerPanel = null;
+	private Image image = null;
+
+	public void init(){
+		this.setTitle("创协签到软件");
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
+		nameLabel = new JLabel("姓名：");
+		IDLabel = new JLabel("学号：");
+		nameField = new JTextField("");
+		idField = new JTextField("");
+		askForLeaveBtn = new JButton("签到");
+		cancelBtn = new JButton("取消");
+		labelFont = new Font("microsoft yahei", Font.PLAIN, 20);
+		centerPanel = new JPanel();
+		image = new ImageIcon("res/images/askforleave.jpg").getImage();
+	}
+
+	public void setAttribute(){
+		nameLabel.setFont(labelFont);
+		IDLabel.setFont(labelFont);
+		nameField.setColumns(10);
+		idField.setColumns(10);
+		nameField.setFont(labelFont);
+		idField.setFont(labelFont);
+		askForLeaveBtn.setFont(new Font("microsoft yahei", Font.PLAIN, 16));
+		cancelBtn.setFont(new Font("microsoft yahei", Font.PLAIN, 16));
+		centerPanel.setBorder(new EmptyBorder((int)(ScreenUtils.HEIGHT*0.25),0,0,0));
+		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+		centerPanel.setOpaque(false);
+		nameLabel.setForeground(Color.BLACK);
+		IDLabel.setForeground(Color.BLACK);
+	}
+
+
+	public void addComponent(){
+		//辅助面板
+		JPanel panel0 = new JPanel();
+		JPanel panel1 = new JPanel();
+		JPanel panel2 = new JPanel();
+		JPanel panel3 = new JPanel();
+		JPanel backgroundPanel = new BackgroundPanel(this, image);
+
+		panel0.setOpaque(false);
+		panel1.setOpaque(false);
+		panel2.setOpaque(false);
+		panel3.setOpaque(false);
+		backgroundPanel.setOpaque(false);
+
+		panel0.setLayout(new BoxLayout(panel0, BoxLayout.X_AXIS));
+		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.X_AXIS));
+
+		panel0.add(Box.createHorizontalGlue());
+
+		panel1.add(nameLabel);
+		panel1.add(nameField);
+		panel1.add(Box.createHorizontalGlue());
+
+		panel2.add(IDLabel);
+		panel2.add(idField);
+		panel2.add(Box.createHorizontalGlue());
+
+		panel3.add(Box.createHorizontalGlue());
+		panel3.add(askForLeaveBtn);
+		panel3.add(Box.createRigidArea(new Dimension(20, 0)));
+		panel3.add(cancelBtn);
+
+		this.getContentPane().add(backgroundPanel);
+		backgroundPanel.add(centerPanel);
+		centerPanel.add(panel0);
+		centerPanel.add(Box.createVerticalStrut(20));
+		centerPanel.add(panel1);
+		centerPanel.add(Box.createVerticalStrut(20));
+		centerPanel.add(panel2);
+		centerPanel.add(Box.createVerticalStrut(20));
+		centerPanel.add(panel3);
+	}
+
+
+	public void addListener(){
+		askForLeaveBtn.addActionListener(new AskForLeaveBtnListener(nameField, idField));
+		cancelBtn.addActionListener(new CancelBtnListener(this));
+	}
+
+	@Override
+	public void display() {
+		init();
+		setAttribute();
+		addComponent();
+		addListener();
+		this.setSize(image.getWidth(this), image.getHeight(this));
+		this.setLocationRelativeTo(null);
+		ImageIconUtils.setDefaultImageIcon(this);
+		this.setResizable(false);
+		this.setVisible(true);
+	}
+
+	private class BackgroundPanel extends JPanel{
+		private ImageObserver observer;
+		private Image image;
+
+		public BackgroundPanel(ImageObserver observer, Image image){
+			this.observer = observer;
+			this.image = image;
+		}
+
+		@Override
+		public void paintComponent(Graphics g){
+			g.drawImage(image, 0, 0, observer);
+		}
+
+	}
+}
