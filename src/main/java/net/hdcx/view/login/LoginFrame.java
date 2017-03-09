@@ -1,6 +1,6 @@
-package net.hdcx.login;
+package net.hdcx.view.login;
 
-import net.hdcx.login.listener.SureBtnListener;
+import net.hdcx.view.login.listener.SureBtnListener;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 

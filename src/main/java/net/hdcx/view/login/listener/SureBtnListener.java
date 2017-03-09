@@ -1,4 +1,4 @@
-package net.hdcx.login.listener;
+package net.hdcx.view.login.listener;
 
 import net.hdcx.view.main.MainFrame;
 

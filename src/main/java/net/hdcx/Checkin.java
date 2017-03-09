@@ -1,6 +1,6 @@
 package net.hdcx;
 
-import net.hdcx.login.LoginFrame;
+import net.hdcx.view.login.LoginFrame;
 
 import javax.swing.*;
 
