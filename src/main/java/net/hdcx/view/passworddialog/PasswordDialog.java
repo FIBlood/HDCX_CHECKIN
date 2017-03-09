@@ -1,6 +1,6 @@
-package net.hdcx.passworddialog;
+package net.hdcx.view.passworddialog;
 
-import net.hdcx.passworddialog.listener.SureBtnListener;
+import net.hdcx.view.passworddialog.listener.SureBtnListener;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.PasswordValidator;
 import net.hdcx.view.IWindow;

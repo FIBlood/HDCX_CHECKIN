@@ -1,6 +1,6 @@
 package net.hdcx.view.main.listener.menulistener;
 
-import net.hdcx.passworddialog.PasswordDialog;
+import net.hdcx.view.passworddialog.PasswordDialog;
 import net.hdcx.view.main.menu.ManageSettingDialog;
 
 import java.awt.event.ActionEvent;

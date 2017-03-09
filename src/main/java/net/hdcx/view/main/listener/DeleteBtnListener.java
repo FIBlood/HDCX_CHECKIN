@@ -1,7 +1,7 @@
 package net.hdcx.view.main.listener;
 
 import net.hdcx.bean.Notice;
-import net.hdcx.passworddialog.PasswordDialog;
+import net.hdcx.view.passworddialog.PasswordDialog;
 import net.hdcx.utils.DBUtils;
 import net.hdcx.utils.NoticeList;
 import net.hdcx.view.main.ShowPublishNoticePanel;

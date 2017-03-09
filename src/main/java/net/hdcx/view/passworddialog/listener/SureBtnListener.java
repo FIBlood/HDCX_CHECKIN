@@ -1,6 +1,6 @@
-package net.hdcx.passworddialog.listener;
+package net.hdcx.view.passworddialog.listener;
 
-import net.hdcx.passworddialog.PasswordDialog;
+import net.hdcx.view.passworddialog.PasswordDialog;
 import net.hdcx.view.IWindow;
 
 import javax.swing.*;
