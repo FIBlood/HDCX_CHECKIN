@@ -6,6 +6,7 @@ import net.hdcx.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class MessageDAO implements IMessageDAO {
 			affectedRows = qr.update(sql, message.getStudentId(), message.getName(), message.getMessage());
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "留言失败，请联系管理员");
 		}
 		return affectedRows;
 	}

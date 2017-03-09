@@ -89,13 +89,14 @@
     <column id="26" parent="8" name="message">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="27" parent="8" name="time">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
     </column>
     <key id="28" parent="8" name="PRIMARY">
-      <ColNames>studentId</ColNames>
+      <ColNames>message</ColNames>
       <Primary>1</Primary>
     </key>
     <column id="29" parent="9" name="studentId">

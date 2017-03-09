@@ -3,6 +3,7 @@ package net.hdcx.dao;
 import net.hdcx.bean.Notice;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 公告操作的DAO接口
@@ -38,5 +39,5 @@ public interface INoticesDAO {
 	 * 获取有效公告列表
 	 * @return 公告列表
 	 */
-	List<Object[]> getNotices();
+	List<Map<String, Object>> getNotices();
 }

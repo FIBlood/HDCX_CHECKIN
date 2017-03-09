@@ -1,23 +1,18 @@
 package net.hdcx.view.main;
 
-import net.hdcx.bean.Notice;
-import net.hdcx.utils.DBUtils;
 import net.hdcx.utils.ImageIconUtils;
-import net.hdcx.utils.NoticeList;
+import net.hdcx.utils.Preprocessor;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.main.listener.*;
+import net.hdcx.view.main.listener.CheckBtnListener;
+import net.hdcx.view.main.listener.CheckinBtnListener;
+import net.hdcx.view.main.listener.CheckoutBtnListener;
+import net.hdcx.view.main.listener.PublishNoticeBtnListener;
 import net.hdcx.view.main.listener.menulistener.*;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
-import java.sql.SQLException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 主面板
@@ -174,40 +169,14 @@ public class MainFrame extends JFrame implements IWindow {
 		menus[7].setMnemonic(KeyEvent.VK_H);
 	}
 
-	private void getData() {
-		QueryRunner qr = new QueryRunner(DBUtils.getDataSource());
-		String sql = "select content, publisher,date_format(publishTime,'%Y/%m/%d %H:%i') as publishTime, date_format(deadline,'%Y/%m/%d %H:%i') as deadline from notices where now()<deadline";
-		try {
-			List<Map<String, Object>> mapList = qr.query(sql, new MapListHandler());
-			for (Iterator<Map<String, Object>> it = mapList.iterator(); it.hasNext(); ) {
-				Map<String, Object> map = it.next();
-				String content = (String) map.get("content");
-				String publisher = (String) map.get("publisher");
-				String publishTime = (String) map.get("publishTime");
-				String deadline = (String) map.get("deadline");
-				Notice notice = new Notice();
-				notice.setContent(content);
-				notice.setPublisher(publisher);
-				notice.setPublishTime(publishTime);
-				notice.setDeadline(deadline);
-				NoticeList.getNoticeList().add(notice);
-			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			JOptionPane.showMessageDialog(this, "获取公告数据失败");
-		}
-		ShowPublishNoticePanel noticePanel = RightPanel.getNoticePanel();
-		noticePanel.getData();
-		noticePanel.addToPanel();
-	}
-
 	public void display() {
 		init();
 		setAttribute();
 		addComponent();
 		setMenuMnemonic();
 		addListener();
-		getData();
+		Preprocessor.getNotices();
+		Preprocessor.getOnDutyPeople();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		ImageIconUtils.setDefaultImageIcon(this);
 		this.setSize((int) (image.getWidth(this) * 0.6), (int) (image.getHeight(this) * 0.8));

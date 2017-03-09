@@ -3,7 +3,6 @@ package net.hdcx.view.checkin;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.checkin.listener.CancelBtnListener;
 import net.hdcx.view.checkin.listener.CheckinBtnListener;
 import net.hdcx.view.checkin.listener.WorkTimeBoxListener;
 import net.hdcx.view.checkin.listener.WorkWeekBoxListener;
@@ -28,10 +27,10 @@ public class CheckinDialog extends JDialog implements IWindow {
 	private Font labelFont = null;
 	private JPanel centerPanel = null;
 	private Image image = null;
-	private JComboBox<String> workTimeBox = null;
+	private static JComboBox<String> workTimeBox = null;
 	private DefaultListModel<String> dlm;
-	private JList<String> nameList;
-	private JComboBox<String> workWeekBox;
+	private static JList<String> nameList;
+	private static JComboBox<String> workWeekBox;
 
 	public CheckinDialog(){
 		this.init();
@@ -128,7 +127,7 @@ public class CheckinDialog extends JDialog implements IWindow {
 		checkinBtn.addActionListener(new CheckinBtnListener(nameList, workTimeBox));
 		workTimeBox.addItemListener(new WorkTimeBoxListener(workTimeBox, workWeekBox, dlm));
 		workWeekBox.addItemListener(new WorkWeekBoxListener(workTimeBox, workWeekBox, dlm));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 
 	}
 
@@ -156,4 +155,15 @@ public class CheckinDialog extends JDialog implements IWindow {
 
 	}
 
+	public static JList<String> getNameList() {
+		return nameList;
+	}
+
+	public static JComboBox<String> getWorkWeekBox() {
+		return workWeekBox;
+	}
+
+	public static JComboBox<String> getWorkTimeBox() {
+		return workTimeBox;
+	}
 }

@@ -4,10 +4,11 @@ import net.hdcx.bean.Notice;
 import net.hdcx.dao.INoticesDAO;
 import net.hdcx.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 公告操作相关的DAO
@@ -53,14 +54,14 @@ public class NoticesDAO implements INoticesDAO{
 	}
 
 	@Override
-	public List<Object[]> getNotices() {
-		List<Object[]> resultList = null;
-		String sql = "select publisher, content, publishTime from notices where now()<deadline";
+	public List<Map<String, Object>> getNotices() {
+		List<Map<String, Object>> resultMap = null;
+		String sql = "select publisher, content, date_format(publishTime, '%Y/%m/%d %H:%i') as publishTime, date_format(deadline, '%Y/%m/%d %H:%i') as deadline from notices where now()<deadline";
 		try {
-			resultList = qr.query(sql, new ArrayListHandler());
+			resultMap = qr.query(sql, new MapListHandler());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return resultList;
+		return resultMap;
 	}
 }

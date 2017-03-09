@@ -11,20 +11,15 @@ import java.awt.event.ActionListener;
  * Created by Kevin on 2017/3/2.
  */
 public class SureBtnListener implements ActionListener {
-
-	private JComboBox workWeekBox;
-	private JComboBox workTimeBox;
 	private JDialog dialog;
 
-	public SureBtnListener(JDialog dialog, JComboBox workWeekBox, JComboBox workTimeBox) {
+	public SureBtnListener(JDialog dialog) {
 		this.dialog = dialog;
-		this.workWeekBox = workWeekBox;
-		this.workTimeBox = workTimeBox;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CheckResultDialog checkResultDialog = new CheckResultDialog(workWeekBox, workTimeBox);
+		CheckResultDialog checkResultDialog = new CheckResultDialog();
 		dialog.setVisible(false);
 		checkResultDialog.display();
 	}

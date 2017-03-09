@@ -31,23 +31,17 @@ public class ShowOnDutyMinistersPanel extends JPanel {
 		this.addListener();
 	}
 
-	public void getData(){
+	public static void update(){
 		dlm.clear();
 		Iterator<Minister> it = MinisterList.getMinisterList().iterator();
 		while(it.hasNext()){
 			Minister member = it.next();
 			dlm.addElement(member.getName()+" "+member.getStudentId());
 		}
-		this.refreshPanel();
 	}
 
 	private void addListener(){
 		checkoutBtn.addActionListener(new CheckoutBtn_MinisterPanel());
-	}
-
-	private void refreshPanel(){
-		this.validate();
-		this.updateUI();
 	}
 
 	public static JList getJList(){

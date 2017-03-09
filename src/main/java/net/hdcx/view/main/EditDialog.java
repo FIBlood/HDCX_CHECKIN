@@ -2,7 +2,6 @@ package net.hdcx.view.main;
 
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.main.listener.CancelBtnListener;
 import net.hdcx.view.main.listener.UpdateBtnListener;
 
 import javax.swing.*;
@@ -54,7 +53,7 @@ public class EditDialog extends JDialog implements IWindow {
 
 	private void addListener(){
 		updateBtn.addActionListener(new UpdateBtnListener(originTextArea, editArea));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	@Override

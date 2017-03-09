@@ -5,7 +5,6 @@ import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import javax.swing.*;
@@ -158,8 +157,10 @@ public class SkimDialog extends JDialog implements IWindow {
 			centerPanel.add(messageJSP);
 			String sql = "select name, message, date_format(time, '%Y-%m-%d %H:%i') from message";
 			try {
-				Object[] results = qr.query(sql, new ArrayHandler());
-				putDataIntoMessageDTM(results);
+				List<Object[]> resultList = qr.query(sql, new ArrayListHandler());
+				for (Object[] results : resultList){
+					putDataIntoMessageDTM(results);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

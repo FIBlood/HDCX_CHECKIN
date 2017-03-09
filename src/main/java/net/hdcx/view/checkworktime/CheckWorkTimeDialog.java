@@ -3,7 +3,6 @@ package net.hdcx.view.checkworktime;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.checkworktime.listener.CancelBtnListener;
 import net.hdcx.view.checkworktime.listener.SureBtnListener;
 
 import javax.swing.*;
@@ -24,8 +23,8 @@ public class CheckWorkTimeDialog extends JDialog implements IWindow{
 	private JLabel banciLabel = null;
 	private JButton sureBtn = null;
 	private JButton cancelBtn = null;
-	private JComboBox workWeekBox = null;
-	private JComboBox workTimeBox = null;
+	private static JComboBox workWeekBox = null;
+	private static JComboBox workTimeBox = null;
 
 	public CheckWorkTimeDialog(){}
 
@@ -83,8 +82,8 @@ public class CheckWorkTimeDialog extends JDialog implements IWindow{
 
 
 	private void addListener(){
-		sureBtn.addActionListener(new SureBtnListener(this, workWeekBox, workTimeBox));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		sureBtn.addActionListener(new SureBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){
@@ -99,4 +98,11 @@ public class CheckWorkTimeDialog extends JDialog implements IWindow{
 		this.setVisible(true);
 	}
 
+	public static JComboBox getWorkWeekBox() {
+		return workWeekBox;
+	}
+
+	public static JComboBox getWorkTimeBox() {
+		return workTimeBox;
+	}
 }

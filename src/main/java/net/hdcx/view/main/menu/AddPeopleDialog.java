@@ -4,7 +4,6 @@ import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
 import net.hdcx.view.main.listener.menulistener.AddBtnListener;
-import net.hdcx.view.main.listener.menulistener.CancelBtnlistener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -187,7 +186,7 @@ public class AddPeopleDialog extends JDialog implements IWindow{
 
 	private void addListener(){
 		addBtn.addActionListener(new AddBtnListener(this, actionMap.get(actionCommand)));
-		cancelBtn.addActionListener(new CancelBtnlistener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){

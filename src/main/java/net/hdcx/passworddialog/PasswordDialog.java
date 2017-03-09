@@ -1,6 +1,5 @@
 package net.hdcx.passworddialog;
 
-import net.hdcx.passworddialog.listener.CancelBtnListener;
 import net.hdcx.passworddialog.listener.SureBtnListener;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.PasswordValidator;
@@ -72,7 +71,7 @@ public class PasswordDialog extends JDialog{
 
 	private void addListener(){
 		sureBtn.addActionListener(new SureBtnListener(window, this));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public boolean validatePassword(){

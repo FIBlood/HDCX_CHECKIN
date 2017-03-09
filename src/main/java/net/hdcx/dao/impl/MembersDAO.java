@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class MembersDAO implements IMembersDAO{
 			);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "人员信息添加失败");
 		}
 		return affectedRows;
 	}
@@ -46,6 +48,7 @@ public class MembersDAO implements IMembersDAO{
 			affectedRows = qr.update(sql, studentId);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "操作失败，请联系管理员");
 		}
 		return affectedRows;
 	}
@@ -55,7 +58,7 @@ public class MembersDAO implements IMembersDAO{
 		Member member = new Member();
 		String sql = "select * from  members where studentId=?";
 		try {
-			member = qr.query(sql, new BeanHandler<Member>(Member.class));
+			member = qr.query(sql, new BeanHandler<Member>(Member.class), studentId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -69,6 +72,7 @@ public class MembersDAO implements IMembersDAO{
 			affectedRows = qr.update(sql, params);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "操作失败，请联系管理员");
 		}
 		return affectedRows;
 	}

@@ -3,7 +3,6 @@ package net.hdcx.view.checkout;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.checkout.listener.CancelBtnListener;
 import net.hdcx.view.checkout.listener.CheckoutBtnListener;
 
 import javax.swing.*;
@@ -18,8 +17,8 @@ import java.awt.image.ImageObserver;
 public class CheckoutDialog extends JDialog implements IWindow{
 	private JLabel nameLabel = null;
 	private JLabel IDLabel = null;
-	private JTextField nameField = null;
-	private JTextField IDField = null;
+	private static JTextField nameField = null;
+	private static JTextField idField = null;
 	private JButton signOutBtn = null;
 	private JButton cancelBtn = null;
 	private Font labelFont = null;
@@ -36,7 +35,7 @@ public class CheckoutDialog extends JDialog implements IWindow{
 		nameLabel = new JLabel("姓名：");
 		IDLabel = new JLabel("学号：");
 		nameField = new JTextField();
-		IDField = new JTextField();
+		idField = new JTextField();
 		signOutBtn = new JButton("确定");
 		cancelBtn = new JButton("取消");
 		labelFont = new Font("microsoft yahei", Font.PLAIN, 20);
@@ -48,9 +47,9 @@ public class CheckoutDialog extends JDialog implements IWindow{
 		nameLabel.setFont(labelFont);
 		IDLabel.setFont(labelFont);
 		nameField.setColumns(10);
-		IDField.setColumns(10);
+		idField.setColumns(10);
 		nameField.setFont(labelFont);
-		IDField.setFont(labelFont);
+		idField.setFont(labelFont);
 		signOutBtn.setFont(new Font("microsoft yahei", Font.PLAIN, 16));
 		cancelBtn.setFont(new Font("microsoft yahei", Font.PLAIN, 16));
 		centerPanel.setBorder(new EmptyBorder((int)(ScreenUtils.HEIGHT*0.3),0,0,0));
@@ -80,7 +79,7 @@ public class CheckoutDialog extends JDialog implements IWindow{
 		panel0.add(nameField);
 
 		panel1.add(IDLabel);
-		panel1.add(IDField);
+		panel1.add(idField);
 
 		panel2.add(Box.createHorizontalGlue());
 		panel2.add(signOutBtn);
@@ -98,8 +97,8 @@ public class CheckoutDialog extends JDialog implements IWindow{
 	}
 
 	private void addListener(){
-		signOutBtn.addActionListener(new CheckoutBtnListener(IDField));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		signOutBtn.addActionListener(new CheckoutBtnListener());
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){
@@ -126,5 +125,13 @@ public class CheckoutDialog extends JDialog implements IWindow{
 		public void paintComponent(Graphics g){
 			g.drawImage(image, 0, 0, observer);
 		}
+	}
+
+	public static JTextField getNameField() {
+		return nameField;
+	}
+
+	public static JTextField getIdField() {
+		return idField;
 	}
 }

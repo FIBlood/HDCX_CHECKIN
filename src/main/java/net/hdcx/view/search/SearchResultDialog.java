@@ -2,18 +2,16 @@ package net.hdcx.view.search;
 
 import net.hdcx.bean.Member;
 import net.hdcx.bean.Minister;
-import net.hdcx.utils.DBUtils;
+import net.hdcx.service.IPeopleService;
+import net.hdcx.service.impl.PeopleService;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
 import java.util.Vector;
 
 /**
@@ -29,13 +27,8 @@ public class SearchResultDialog extends JDialog implements IWindow{
 	private Vector row = null;
 	private DefaultTableCellRenderer dtcr = null;
 	private Font font = null;
-	private String name = null;
-	private String id = null;
 
-	public SearchResultDialog(String name, String id) {
-		this.name = name;
-		this.id = id;
-	}
+	public SearchResultDialog() {}
 
 	private void init(){
 		this.setTitle("搜索结果");
@@ -82,31 +75,10 @@ public class SearchResultDialog extends JDialog implements IWindow{
 	private void getResult(){
 		Member member = null;
 		Minister minister = null;
-		QueryRunner qr = new QueryRunner(DBUtils.getDataSource());
-		String table = "members";
-
-		for(int count = 0; count < 2; table="ministers", count++){
-			String sql = "select * from " + table + " where studentId=? and name=?";
-			//查找members表
-			if (count == 0){
-				member = new Member();
-				try {
-					member = qr.query(sql, new BeanHandler<Member>(Member.class), id, name);
-					if (member != null){break;}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			//查找mininster表
-			if(count == 1){
-				minister = new Minister();
-				try {
-					minister = qr.query(sql, new BeanHandler<Minister>(Minister.class), id, name);
-					if (minister != null){break;}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		IPeopleService peopleService = new PeopleService();
+		member = peopleService.findMemberById(SearchDialog.getIdField().getText());
+		if (member == null){
+			minister = peopleService.findMinisterById(SearchDialog.getIdField().getText());
 		}
 
 		//往表格中添加数据

@@ -1,6 +1,5 @@
 package net.hdcx.login;
 
-import net.hdcx.login.listener.CancelBtnListener;
 import net.hdcx.login.listener.SureBtnListener;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
@@ -101,7 +100,7 @@ public class LoginFrame extends JFrame {
 		sureBtn.addActionListener(sureBtnListener);
 		usernameField.addKeyListener(sureBtnListener);
 		passwordField.addKeyListener(sureBtnListener);
-		cancelBtn.addActionListener(new CancelBtnListener());
+		cancelBtn.addActionListener(e -> System.exit(0));
 	}
 
 	public void display(){

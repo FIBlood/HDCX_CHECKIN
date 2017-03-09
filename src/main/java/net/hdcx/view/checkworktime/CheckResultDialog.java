@@ -1,19 +1,17 @@
 package net.hdcx.view.checkworktime;
 
-import net.hdcx.utils.DBUtils;
+import net.hdcx.service.IPeopleService;
+import net.hdcx.service.impl.PeopleService;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.sql.SQLException;
-import java.util.Vector;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 查找结果对话框
@@ -23,14 +21,9 @@ public class CheckResultDialog extends JDialog implements IWindow{
 	private JTable table;
 	private DefaultTableModel dtm;
 	private JScrollPane jsp;
-	private JComboBox workWeekBox;
-	private JComboBox workTimeBox;
 	private DefaultTableCellRenderer dtcr;
 
-	public CheckResultDialog(JComboBox workWeekBox, JComboBox workTimeBox){
-		this.workWeekBox = workWeekBox;
-		this.workTimeBox = workTimeBox;
-	}
+	public CheckResultDialog(){}
 
 	private void init(){
 		this.setTitle("查找结果");
@@ -73,27 +66,27 @@ public class CheckResultDialog extends JDialog implements IWindow{
 	}
 
 	private void getData(){
-		String workWeek = (String)workWeekBox.getSelectedItem();
-		String workTime = (String)workTimeBox.getSelectedItem();
-		QueryRunner qr = new QueryRunner(DBUtils.getDataSource());
-		String tableName = "members";
-		for(int count = 0; count < 2; tableName="ministers", count++){
-			String sql = "select * from " + tableName + " where workWeek=? and workTime=?";
-			try {
-				List<Object[]> personList = qr.query(sql, new ArrayListHandler(), workWeek, workTime);
-				for (Object[] person : personList){
-					Vector row = new Vector();
-					for (int i = 0; i < person.length; i++){
-						row.add(person[i].toString());
-						if(i == 8){
-							break;
-						}
-					}
-					dtm.addRow(row);
+		String workWeek = (String)CheckWorkTimeDialog.getWorkWeekBox().getSelectedItem();
+		String workTime = (String)CheckWorkTimeDialog.getWorkTimeBox().getSelectedItem();
+		IPeopleService peopleService = new PeopleService();
+		String sql = "select * from members where workWeek=? and workTime=?";
+		List<Object[]> resultList = peopleService.queryMembers(sql, workWeek, workTime);
+		addToDTM(resultList);
+		sql = "select * from ministers where workWeek=? and workTime=?";
+		resultList = peopleService.queryMinisters(sql, workWeek, workTime);
+		addToDTM(resultList);
+	}
+
+	private void addToDTM(List<Object[]> resultList){
+		for (Object[] results : resultList){
+			Vector row = new Vector();
+			for (int i = 0; i < results.length; i++){
+				row.add(results[i].toString());
+				if (i == 8){
+					break;
 				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
 			}
+			dtm.addRow(row);
 		}
 	}
 

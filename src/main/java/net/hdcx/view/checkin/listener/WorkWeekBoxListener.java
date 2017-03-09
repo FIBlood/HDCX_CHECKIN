@@ -44,5 +44,6 @@ public class WorkWeekBoxListener implements ItemListener {
 				}
 			}
 		}
+
 	}
 }

@@ -3,7 +3,6 @@ package net.hdcx.view.search;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.search.listener.CancelBtnListener;
 import net.hdcx.view.search.listener.SearchBtnListener;
 
 import javax.swing.*;
@@ -18,8 +17,8 @@ import java.awt.image.ImageObserver;
 public class SearchDialog extends JDialog implements IWindow{
 	private JLabel nameLabel = null;
 	private JLabel IDLabel = null;
-	private JTextField nameField = null;
-	private JTextField idField = null;
+	private static JTextField nameField = null;
+	private static JTextField idField = null;
 	private JButton searchBtn = null;
 	private JButton cancelBtn = null;
 	private JPanel centerPanel = null;
@@ -96,8 +95,8 @@ public class SearchDialog extends JDialog implements IWindow{
 	}
 
 	private void addListener(){
-		searchBtn.addActionListener(new SearchBtnListener(this, nameField, idField));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		searchBtn.addActionListener(new SearchBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){
@@ -125,6 +124,13 @@ public class SearchDialog extends JDialog implements IWindow{
 		public void paintComponent(Graphics g){
 			g.drawImage(image, 0, 0, observer);
 		}
+	}
 
+	public static JTextField getNameField() {
+		return nameField;
+	}
+
+	public static JTextField getIdField() {
+		return idField;
 	}
 }

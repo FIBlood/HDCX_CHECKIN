@@ -4,7 +4,6 @@ import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
 import net.hdcx.view.askforleave.listener.AskForLeaveBtnListener;
-import net.hdcx.view.askforleave.listener.CancelBtnListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -105,8 +104,8 @@ public class AskForLeaveDialog extends JDialog implements IWindow{
 
 
 	public void addListener(){
-		askForLeaveBtn.addActionListener(new AskForLeaveBtnListener(nameField, idField));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		askForLeaveBtn.addActionListener(new AskForLeaveBtnListener());
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	@Override
@@ -135,6 +134,13 @@ public class AskForLeaveDialog extends JDialog implements IWindow{
 		public void paintComponent(Graphics g){
 			g.drawImage(image, 0, 0, observer);
 		}
+	}
 
+	public static JTextField getNameField() {
+		return nameField;
+	}
+
+	public static JTextField getIdField() {
+		return idField;
 	}
 }

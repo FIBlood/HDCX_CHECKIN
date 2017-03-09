@@ -1,8 +1,7 @@
 package net.hdcx.service;
 
-import net.hdcx.bean.Notice;
-
 import java.util.List;
+import java.util.Map;
 
 /**
  * 公告服务功能接口
@@ -11,26 +10,22 @@ import java.util.List;
 public interface INoticeService {
 	/**
 	 * 发布公告
-	 * @param notice 公告
 	 */
-	void publishNotice(Notice notice);
+	void publishNotice();
 
 	/**
 	 * 删除公告
-	 * @param notice 公告
 	 */
-	void removeNotice(Notice notice);
+	void removeNotice();
 
 	/**
 	 * 修改公告
-	 * @param orignNotice 原公告
-	 * @param newNotice 新公告
 	 */
-	void changeContent(String orignNotice, String newNotice);
+	void changeContent();
 
 	/**
 	 * 查看有效公告
 	 * @return 公告列表
 	 */
-	List<Object[]> checkNotices();
+	List<Map<String, Object>> checkNotices();
 }

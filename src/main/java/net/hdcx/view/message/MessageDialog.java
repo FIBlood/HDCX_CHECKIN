@@ -3,7 +3,6 @@ package net.hdcx.view.message;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.message.listener.CancelBtnListener;
 import net.hdcx.view.message.listener.SureBtnListener;
 
 import javax.swing.*;
@@ -20,10 +19,10 @@ public class MessageDialog extends JDialog implements IWindow{
 	private JLabel nameLabel = null;
 	private JLabel IDLabel = null;
 	private JLabel messageLabel = null;
-	private JTextField nameField = null;
-	private JTextField idField = null;
+	private static JTextField nameField = null;
+	private static JTextField idField = null;
 	private JScrollPane messageScroll = null;
-	private JTextArea messageArea = null;
+	private static JTextArea messageArea = null;
 	private Font labelFont = null;
 	private JButton sureBtn = null;
 	private JButton cancelBtn = null;
@@ -126,8 +125,8 @@ public class MessageDialog extends JDialog implements IWindow{
 	}
 
 	private void addListener(){
-		sureBtn.addActionListener(new SureBtnListener(this, nameField, idField, messageArea));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		sureBtn.addActionListener(new SureBtnListener());
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){
@@ -155,7 +154,17 @@ public class MessageDialog extends JDialog implements IWindow{
 		public void paintComponent(Graphics g){
 			g.drawImage(image, 0, 0, observer);
 		}
-
 	}
 
+	public static JTextField getNameField() {
+		return nameField;
+	}
+
+	public static JTextField getIdField() {
+		return idField;
+	}
+
+	public static JTextArea getMessageArea() {
+		return messageArea;
+	}
 }

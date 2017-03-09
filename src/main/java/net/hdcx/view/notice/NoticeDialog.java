@@ -3,7 +3,6 @@ package net.hdcx.view.notice;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.notice.listener.CancelBtnListener;
 import net.hdcx.view.notice.listener.IndateFieldFocusListener;
 import net.hdcx.view.notice.listener.PublishBtnListener;
 
@@ -20,10 +19,10 @@ public class NoticeDialog extends JDialog implements IWindow{
 	private JLabel nameLabel = null;
 	private JLabel publishLabel = null;
 	private JLabel indateLabel = null;
-	private JTextField indateField = null;
-	private JTextField nameField = null;
+	private static JTextField indateField = null;
+	private static JTextField nameField = null;
 	private JScrollPane contentScroll = null;
-	private JTextArea contentArea = null;
+	private static JTextArea contentArea = null;
 	private JButton publishBtn = null;
 	private JButton cancelBtn = null;
 	private JPanel centerPanel = null;
@@ -129,9 +128,9 @@ public class NoticeDialog extends JDialog implements IWindow{
 	}
 
 	private void addListener(){
-		publishBtn.addActionListener(new PublishBtnListener(nameField, indateField, contentArea));
+		publishBtn.addActionListener(new PublishBtnListener());
 		indateField.addFocusListener(new IndateFieldFocusListener(indateField));
-		cancelBtn.addActionListener(new CancelBtnListener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){
@@ -159,6 +158,17 @@ public class NoticeDialog extends JDialog implements IWindow{
 		public void paintComponent(Graphics g){
 			g.drawImage(image, 0, 0, observer);
 		}
+	}
 
+	public static JTextField getIndateField() {
+		return indateField;
+	}
+
+	public static JTextField getNameField() {
+		return nameField;
+	}
+
+	public static JTextArea getContentArea() {
+		return contentArea;
 	}
 }

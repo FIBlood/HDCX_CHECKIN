@@ -11,22 +11,15 @@ import java.awt.event.ActionListener;
  * Created by Kevin on 2017/3/1.
  */
 public class SearchBtnListener implements ActionListener {
-
-	private JTextField nameField;
-	private JTextField idField;
 	private JDialog dialog;
 
-	public SearchBtnListener(JDialog dialog, JTextField nameField, JTextField idField) {
+	public SearchBtnListener(JDialog dialog) {
 		this.dialog = dialog;
-		this.nameField = nameField;
-		this.idField = idField;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String name = nameField.getText();
-		String id = idField.getText();
-		SearchResultDialog searchResultDialog = new SearchResultDialog(name, id);
+		SearchResultDialog searchResultDialog = new SearchResultDialog();
 		dialog.setVisible(false);
 		searchResultDialog.display();
 	}

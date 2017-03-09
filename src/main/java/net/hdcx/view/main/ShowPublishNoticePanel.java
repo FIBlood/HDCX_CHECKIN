@@ -25,7 +25,7 @@ public class ShowPublishNoticePanel extends JPanel{
 
 	}
 
-	public void getData(){
+	public void update(){
 		List<Notice> noticeList = NoticeList.getNoticeList();
 		noticeAreaList.clear();
 		int length = noticeList.size();
@@ -96,11 +96,5 @@ public class ShowPublishNoticePanel extends JPanel{
 			editBtn.addActionListener(new EditBtnListener(noticeAreaList.get(i)));
 			deleteBtn.addActionListener(new DeleteBtnListener(this, panel, noticeAreaList.get(i).getText()));
 		}
-		this.refreshPanel();
-	}
-
-	private void refreshPanel(){
-		this.validate();
-		this.updateUI();
 	}
 }

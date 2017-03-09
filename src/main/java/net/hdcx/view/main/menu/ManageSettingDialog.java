@@ -3,7 +3,6 @@ package net.hdcx.view.main.menu;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.main.listener.menulistener.CancelBtnlistener;
 import net.hdcx.view.main.listener.menulistener.SaveBtnListener;
 
 import javax.swing.*;
@@ -305,7 +304,7 @@ public class ManageSettingDialog extends JDialog implements IWindow{
 
 	private void addListener(){
 		saveBtn.addActionListener(new SaveBtnListener(this));
-		cancelBtn.addActionListener(new CancelBtnlistener(this));
+		cancelBtn.addActionListener(e -> this.setVisible(false));
 	}
 
 	public void display(){

@@ -8,7 +8,7 @@ import javax.swing.*;
  * 黑龙江大学学生创业协会---签到系统
  * @author 梁凯文  QQ: 401106891
  * @version 1.1.0
- * @since jdk 1.5
+ * @since jdk 1.8
  * 最后修改于 2016/8/10
  * 最后修改人 梁凯文
  *  */
