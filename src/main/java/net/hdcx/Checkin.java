@@ -24,7 +24,9 @@ public class Checkin {
 	}
 
 	public static void main(String[] args) {
-		LoginFrame loginFrame = new LoginFrame();
-		loginFrame.display();
+		SwingUtilities.invokeLater(()-> {
+			LoginFrame loginFrame = new LoginFrame();
+			loginFrame.display();
+		});
 	}
 }

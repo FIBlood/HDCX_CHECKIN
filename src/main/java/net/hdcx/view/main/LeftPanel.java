@@ -34,17 +34,28 @@ public class LeftPanel extends JPanel {
 	}
 
 	public void init(){
-		checkinBtn = new JButton(new ImageIcon("res/images/signin.jpg"));
-		checkoutBtn = new JButton(new ImageIcon("res/images/signout.jpg"));
+		checkinBtn = new JButton(new ImageIcon("res/images/checkinBtn.jpg"));
+		checkinBtn.setToolTipText("签到");
+		checkoutBtn = new JButton(new ImageIcon("res/images/checkoutBtn.jpg"));
+		checkoutBtn.setToolTipText("签退");
 		campusEntryBtn = new JButton(new ImageIcon("res/images/campusentry.jpg"));
+		campusEntryBtn.setToolTipText("校园网入口");
 		askForLeaveBtn = new JButton(new ImageIcon("res/images/qingjia.jpg"));
+		askForLeaveBtn.setToolTipText("请假");
 		sinaBtn = new JButton(new ImageIcon("res/images/sina.jpg"));
+		sinaBtn.setToolTipText("新浪微博");
 		renrenBtn = new JButton(new ImageIcon("res/images/renren.jpg"));
+		renrenBtn.setToolTipText("人人网");
 		hdcxBtn = new JButton(new ImageIcon("res/images/hdcx.jpg"));
+		hdcxBtn.setToolTipText("创协官网");
 		messageBtn = new JButton(new ImageIcon("res/images/message.jpg"));
+		messageBtn.setToolTipText("留言");
 		searchBtn = new JButton(new ImageIcon("res/images/search.jpg"));
+		searchBtn.setToolTipText("搜索");
 		publishNoticeBtn = new JButton(new ImageIcon("res/images/publish.jpg"));
+		publishNoticeBtn.setToolTipText("发布公告");
 		checkBtn = new JButton(new ImageIcon("res/images/check.jpg"));
+		checkBtn.setToolTipText("查询值班信息");
 		timerPanel = new TimerPanel();
 		leftChildPanel = new JPanel();
 	}
