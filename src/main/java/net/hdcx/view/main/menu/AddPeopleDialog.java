@@ -63,7 +63,7 @@ public class AddPeopleDialog extends JDialog implements IWindow{
 		addBtn = new JButton("录入");
 		cancelBtn = new JButton("取消");
 		font = new Font("Microsoft yahei", Font.PLAIN, 20);
-		image = new ImageIcon("res/images/addmemberpanel.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/addmemberpanel.jpg")).getImage();
 		backgroundPanel = new BackgroundPanel(this, image);
 		actionMap = new HashMap<>();
 		actionMap.put("部员录入", "members");

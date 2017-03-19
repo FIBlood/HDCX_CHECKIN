@@ -38,7 +38,7 @@ public class SearchDialog extends JDialog implements IWindow{
 		cancelBtn = new JButton("取消");
 		centerPanel = new JPanel();
 		labelFont = new Font("microsoft yahei", Font.PLAIN, 20);
-		image = new ImageIcon("res/images/searchpanel.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/searchpanel.jpg")).getImage();
 	}
 
 	private void setAttribute(){

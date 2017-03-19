@@ -3,10 +3,7 @@ package net.hdcx.view.main;
 import net.hdcx.utils.ImageIconUtils;
 import net.hdcx.utils.Preprocessor;
 import net.hdcx.view.IWindow;
-import net.hdcx.view.main.listener.CheckBtnListener;
-import net.hdcx.view.main.listener.CheckinBtnListener;
-import net.hdcx.view.main.listener.CheckoutBtnListener;
-import net.hdcx.view.main.listener.PublishNoticeBtnListener;
+import net.hdcx.view.main.listener.*;
 import net.hdcx.view.main.listener.menulistener.*;
 
 import javax.swing.*;
@@ -74,7 +71,7 @@ public class MainFrame extends JFrame implements IWindow {
 	private RightPanel rightPanel = null;
 	private Font menuBarFont = new Font("Microsoft Yahei", Font.PLAIN, 14);
 	private Font menuItemFont = new Font("Microsoft Yahei", Font.PLAIN, 12);
-	private Image image = null;
+	private Image image = new ImageIcon(Class.class.getResource("/images/background.jpg")).getImage();
 
 	public MainFrame() {
 		this.setTitle("创协签到软件");
@@ -88,7 +85,7 @@ public class MainFrame extends JFrame implements IWindow {
 		menuBar = new JMenuBar();
 		leftPanel = new LeftPanel();
 		rightPanel = new RightPanel();
-		image = new ImageIcon("res/images/background.jpg").getImage();
+		ImageIconUtils.setDefaultImageIcon(this);
 		centerPanel = new BackgroundPanel(this, image);
 	}
 
@@ -156,6 +153,7 @@ public class MainFrame extends JFrame implements IWindow {
 		menuItem5[0].addActionListener(new CheckBtnListener());
 		menuItem6[0].addActionListener(new ManageSettingListener());
 		menuItem7[0].addActionListener(new AboutListener());
+		this.addWindowListener(new ClosingListener());
 	}
 
 	private void setMenuMnemonic() {
@@ -180,7 +178,7 @@ public class MainFrame extends JFrame implements IWindow {
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		ImageIconUtils.setDefaultImageIcon(this);
 		this.setSize((int) (image.getWidth(this) * 0.6), (int) (image.getHeight(this) * 0.8));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

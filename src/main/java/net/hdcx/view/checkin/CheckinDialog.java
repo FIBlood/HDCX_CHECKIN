@@ -1,6 +1,7 @@
 package net.hdcx.view.checkin;
 
 import net.hdcx.utils.ImageIconUtils;
+import net.hdcx.utils.Preprocessor;
 import net.hdcx.utils.ScreenUtils;
 import net.hdcx.view.IWindow;
 import net.hdcx.view.checkin.listener.CheckinBtnListener;
@@ -37,6 +38,7 @@ public class CheckinDialog extends JDialog implements IWindow {
 		this.setAttribute();
 		this.addComponent();
 		this.addListener();
+		Preprocessor.getInitCheckNameList();
 		this.display();
 	}
 
@@ -50,7 +52,7 @@ public class CheckinDialog extends JDialog implements IWindow {
 		cancelBtn = new JButton("取消");
 		labelFont = new Font("microsoft yahei", Font.PLAIN, 20);
 		centerPanel = new JPanel();
-		image = new ImageIcon("res/images/signinpanel.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/signinpanel.jpg")).getImage();
 		workTimeBox = new JComboBox<>(WORKTIME);
 		dlm = new DefaultListModel<>();
 		nameList = new JList<>(dlm);
@@ -80,13 +82,13 @@ public class CheckinDialog extends JDialog implements IWindow {
 		JPanel panel0 = new JPanel();
 		panel0.setOpaque(false);
 		panel0.setLayout(new GridLayout(0, 2));
+		JPanel rigthPanel = new JPanel();
+		rigthPanel.setOpaque(false);
+		rigthPanel.setLayout(new BoxLayout(rigthPanel, BoxLayout.Y_AXIS));
 		JPanel leftPanel = new JPanel();
-		leftPanel.setOpaque(false);
-		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-		JPanel rightPanel = new JPanel();
 		JScrollPane jsp = new JScrollPane(nameList);
-		rightPanel.setLayout(new BorderLayout());
-		rightPanel.add(jsp);
+		leftPanel.setLayout(new BorderLayout());
+		leftPanel.add(jsp);
 		JPanel panel2 = new JPanel();
 		panel2.setOpaque(false);
 		panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
@@ -96,8 +98,6 @@ public class CheckinDialog extends JDialog implements IWindow {
 		JPanel panel3 = new JPanel();
 		panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
 		panel3.setOpaque(false);
-		panel3.add(panel2);
-		panel3.add(Box.createVerticalStrut(30));
 		JPanel panel4 = new JPanel();
 		panel4.setOpaque(false);
 		panel4.setLayout(new BoxLayout(panel4, BoxLayout.X_AXIS));
@@ -105,8 +105,10 @@ public class CheckinDialog extends JDialog implements IWindow {
 		panel4.add(workWeekBox);
 		panel4.add(Box.createHorizontalStrut(20));
 		panel3.add(panel4);
-		leftPanel.add(panel3);
-		leftPanel.add(Box.createVerticalStrut(160));
+		panel3.add(Box.createVerticalStrut(30));
+		panel3.add(panel2);
+		rigthPanel.add(panel3);
+		rigthPanel.add(Box.createVerticalStrut(160));
 		JPanel panel1 = new JPanel();
 		panel1.setOpaque(false);
 		panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
@@ -114,9 +116,9 @@ public class CheckinDialog extends JDialog implements IWindow {
 		panel1.add(checkinBtn);
 		panel1.add(Box.createHorizontalStrut(40));
 		panel1.add(cancelBtn);
-		leftPanel.add(panel1);
-		panel0.add(rightPanel);
+		rigthPanel.add(panel1);
 		panel0.add(leftPanel);
+		panel0.add(rigthPanel);
 		centerPanel.add(panel0);
 		backgroundPanel.setOpaque(false);
 		backgroundPanel.add(centerPanel);

@@ -3,7 +3,6 @@ package net.hdcx.utils;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,7 +21,7 @@ public class DBUtils {
 	static{
 		Properties prop = new Properties();
 		try {
-			InputStream is = new FileInputStream("res/properties/db.properties");
+			InputStream is = Class.class.getResourceAsStream("/properties/db.properties");
 			prop.load(is);
 			dataSource = BasicDataSourceFactory.createDataSource(prop);
 		} catch (Exception e) {

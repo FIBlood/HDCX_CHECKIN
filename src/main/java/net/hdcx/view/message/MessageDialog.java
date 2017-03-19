@@ -45,7 +45,7 @@ public class MessageDialog extends JDialog implements IWindow{
 		sureBtn = new JButton("确定");
 		cancelBtn = new JButton("取消");;
 		centerPanel = new JPanel();
-		image = new ImageIcon("res/images/givemessage.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/givemessage.jpg")).getImage();
 	}
 
 	private void setAttribute(){

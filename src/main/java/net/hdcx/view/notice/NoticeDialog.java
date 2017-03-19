@@ -45,7 +45,7 @@ public class NoticeDialog extends JDialog implements IWindow{
 		cancelBtn = new JButton("取消");
 		centerPanel = new JPanel();
 		labelFont = new Font("microsoft yahei",Font.PLAIN,20);
-		image = new ImageIcon("res/images/publishpanel.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/publishpanel.jpg")).getImage();
 	}
 
 	private void setAttribute(){

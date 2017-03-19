@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -79,7 +78,7 @@ public class SureBtnListener implements ActionListener, KeyListener{
 	private String getDefaultUserName(){
 		Properties p = new Properties();
 		try {
-			InputStream is = new FileInputStream("res/properties/admin.properties");
+			InputStream is = Class.class.getResourceAsStream("/properties/admin.properties");
 			p.load(is);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -92,7 +91,7 @@ public class SureBtnListener implements ActionListener, KeyListener{
 	private String getDefaultPassword(){
 		Properties p = new Properties();
 		try {
-			InputStream is = new FileInputStream("res/properties/admin.properties");
+			InputStream is = Class.class.getResourceAsStream("/properties/admin.properties");
 			p.load(is);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,6 +1,5 @@
 package net.hdcx.utils;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -24,7 +23,7 @@ public class PasswordValidator {
 		String defaultPassword = null;
 		Properties p = new Properties();
 		try {
-			InputStream is = new FileInputStream("res/properties/admin.properties");
+			InputStream is = Class.class.getResourceAsStream("/properties/admin.properties");
 			p.load(is);
 			defaultPassword = p.getProperty("password");
 		} catch (IOException e) {

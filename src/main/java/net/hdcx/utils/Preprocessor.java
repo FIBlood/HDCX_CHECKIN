@@ -2,12 +2,16 @@ package net.hdcx.utils;
 
 import net.hdcx.bean.Notice;
 import net.hdcx.service.INoticeService;
+import net.hdcx.service.IPeopleService;
 import net.hdcx.service.impl.NoticeService;
+import net.hdcx.service.impl.PeopleService;
+import net.hdcx.view.checkin.CheckinDialog;
 import net.hdcx.view.main.RightPanel;
 import net.hdcx.view.main.ShowOnDutyMembersPanel;
 import net.hdcx.view.main.ShowOnDutyMinistersPanel;
 import net.hdcx.view.main.ShowPublishNoticePanel;
 
+import javax.swing.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -43,5 +47,22 @@ public class Preprocessor {
 		ShowOnDutyMembersPanel.update();
 		XMLOperator.readMinistersXML();
 		ShowOnDutyMinistersPanel.update();
+	}
+
+	public static void getInitCheckNameList(){
+		DefaultListModel<String> dlm = (DefaultListModel<String>) CheckinDialog.getNameList().getModel();
+		String workWeek = (String)CheckinDialog.getWorkWeekBox().getSelectedItem();
+		String workTime = (String)CheckinDialog.getWorkTimeBox().getSelectedItem();
+		IPeopleService peopleService = new PeopleService();
+		String sql = "select name, studentId from members where workWeek=? and workTime=?";
+		List<Object[]> memberNameList = peopleService.queryMembers(sql, workWeek, workTime);
+		sql = "select name, studentId from ministers where workWeek=? and workTime=?";
+		List<Object[]> ministerNameList = peopleService.queryMinisters(sql, workWeek, workTime);
+		for (Object[] memberName : memberNameList){
+			dlm.addElement(memberName[0].toString() + " " + memberName[1].toString());
+		}
+		for (Object[] ministerName : ministerNameList){
+			dlm.addElement(ministerName[0].toString() + " " + ministerName[1].toString());
+		}
 	}
 }

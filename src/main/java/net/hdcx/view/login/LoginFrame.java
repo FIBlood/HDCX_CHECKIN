@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame {
 		sureBtn = new JButton("确定");
 		labelFont = new Font("Microsoft Yahei",Font.PLAIN,20);
 		cancelBtn = new JButton("取消");
-		image = new ImageIcon("res/images/welcome.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/welcome.jpg")).getImage();
 		centerPanel = new JPanel();
 	}
 

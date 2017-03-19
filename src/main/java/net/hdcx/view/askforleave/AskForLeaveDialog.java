@@ -37,7 +37,7 @@ public class AskForLeaveDialog extends JDialog implements IWindow{
 		cancelBtn = new JButton("取消");
 		labelFont = new Font("microsoft yahei", Font.PLAIN, 20);
 		centerPanel = new JPanel();
-		image = new ImageIcon("res/images/askforleave.jpg").getImage();
+		image = new ImageIcon(Class.class.getResource("/images/askforleave.jpg")).getImage();
 	}
 
 	public void setAttribute(){
